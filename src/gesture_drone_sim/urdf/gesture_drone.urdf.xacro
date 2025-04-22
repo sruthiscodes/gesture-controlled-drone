@@ -1,0 +1,207 @@
+<?xml version="1.0"?>
+<robot name="gesture_drone" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <!-- Base Link -->
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.1 0.1 0.1"/>
+      </geometry>
+      <material name="blue">
+        <color rgba="0 0 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.1 0.1 0.1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.0"/>
+      <inertia ixx="0.1" ixy="0" ixz="0" iyy="0.1" iyz="0" izz="0.1"/>
+    </inertial>
+  </link>
+
+  <!-- Motor Links -->
+  <link name="rotor1">
+    <visual>
+      <geometry>
+        <cylinder length="0.05" radius="0.1"/>
+      </geometry>
+      <material name="red">
+        <color rgba="0.8 0 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.05" radius="0.1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.1"/>
+      <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+    </inertial>
+  </link>
+
+  <link name="rotor2">
+    <visual>
+      <geometry>
+        <cylinder length="0.05" radius="0.1"/>
+      </geometry>
+      <material name="red">
+        <color rgba="0.8 0 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.05" radius="0.1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.1"/>
+      <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+    </inertial>
+  </link>
+
+  <link name="rotor3">
+    <visual>
+      <geometry>
+        <cylinder length="0.05" radius="0.1"/>
+      </geometry>
+      <material name="red">
+        <color rgba="0.8 0 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.05" radius="0.1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.1"/>
+      <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+    </inertial>
+  </link>
+
+  <link name="rotor4">
+    <visual>
+      <geometry>
+        <cylinder length="0.05" radius="0.1"/>
+      </geometry>
+      <material name="red">
+        <color rgba="0.8 0 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.05" radius="0.1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.1"/>
+      <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+    </inertial>
+  </link>
+
+  <!-- Motor Joints -->
+  <joint name="rotor1_connector_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="rotor1"/>
+    <axis xyz="0 0 1"/>
+    <origin xyz="0.2 0.2 0.1" rpy="0 0 0"/>
+  </joint>
+
+  <joint name="rotor2_connector_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="rotor2"/>
+    <axis xyz="0 0 1"/>
+    <origin xyz="-0.2 0.2 0.1" rpy="0 0 0"/>
+  </joint>
+
+  <joint name="rotor3_connector_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="rotor3"/>
+    <axis xyz="0 0 1"/>
+    <origin xyz="0.2 -0.2 0.1" rpy="0 0 0"/>
+  </joint>
+
+  <joint name="rotor4_connector_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="rotor4"/>
+    <axis xyz="0 0 1"/>
+    <origin xyz="-0.2 -0.2 0.1" rpy="0 0 0"/>
+  </joint>
+
+  <!-- ros2_control -->
+  <!-- Commenting out the ros2_control section that was causing issues
+  <ros2_control name="gesture_drone_control" type="system">
+    <hardware>
+      <plugin>mock_components/GenericSystem</plugin>
+    </hardware>
+    <joint name="rotor1_connector_joint">
+      <command_interface name="effort">
+        <param name="min">-100</param>
+        <param name="max">100</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="rotor2_connector_joint">
+      <command_interface name="effort">
+        <param name="min">-100</param>
+        <param name="max">100</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="rotor3_connector_joint">
+      <command_interface name="effort">
+        <param name="min">-100</param>
+        <param name="max">100</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="rotor4_connector_joint">
+      <command_interface name="effort">
+        <param name="min">-100</param>
+        <param name="max">100</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+  </ros2_control>
+  -->
+
+  <!-- Gazebo plugins -->
+  <gazebo>
+    <!-- Simple joint state publisher plugin instead of ros2_control -->
+    <plugin name="joint_state_publisher" filename="libgazebo_ros_joint_state_publisher.so">
+      <ros>
+        <namespace>/</namespace>
+      </ros>
+      <update_rate>100</update_rate>
+      <joint_name>rotor1_connector_joint</joint_name>
+      <joint_name>rotor2_connector_joint</joint_name>
+      <joint_name>rotor3_connector_joint</joint_name>
+      <joint_name>rotor4_connector_joint</joint_name>
+    </plugin>
+
+    <!-- Simple plugin to receive velocity commands -->
+    <plugin name="drone_controller" filename="libgazebo_ros_planar_move.so">
+      <ros>
+        <namespace>/</namespace>
+        <remapping>cmd_vel:=/ImprovedDrone/cmd_vel</remapping>
+        <remapping>odom:=/ImprovedDrone/odom</remapping>
+      </ros>
+      <update_rate>100</update_rate>
+      <command_topic>/ImprovedDrone/cmd_vel</command_topic>
+      <odometry_topic>/ImprovedDrone/odom</odometry_topic>
+      <odometry_frame>odom</odometry_frame>
+      <robot_base_frame>base_link</robot_base_frame>
+    </plugin>
+  </gazebo>
+</robot> 

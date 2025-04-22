@@ -1,0 +1,19 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 100  # Hz
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    velocity_controller:
+      type: velocity_controllers/JointVelocityController
+      joints:
+        - left_front_motor
+        - right_front_motor
+        - left_back_motor
+        - right_back_motor
+      gains:
+        left_front_motor: {p: 100.0, i: 0.01, d: 1.0}
+        right_front_motor: {p: 100.0, i: 0.01, d: 1.0}
+        left_back_motor: {p: 100.0, i: 0.01, d: 1.0}
+        right_back_motor: {p: 100.0, i: 0.01, d: 1.0} 

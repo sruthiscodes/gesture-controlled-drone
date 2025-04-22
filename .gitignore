@@ -1,0 +1,55 @@
+# === ROS 2 / Colcon build artifacts ===
+build/
+install/
+log/
+
+# === Python cache ===
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pyc
+
+# === Compiled binaries ===
+*.so
+*.out
+*.a
+*.o
+
+# === CMake and colcon cache files ===
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+colcon_command_prefix_build.sh*
+colcon_build.rc
+
+# === Editor/IDE files ===
+.vscode/
+.idea/
+*.swp
+*.swo
+*.bak
+*.tmp
+*~
+
+# === Misc ===
+*.DS_Store
+*.log
+*.trace
+*.gz
+
+# === Ignore any generated URDF/SDF if applicable ===
+*.urdf
+*.sdf
+
+# === Ignore model database cache (if used locally) ===
+~/.gazebo/models/
+
+# === Ignore training/checkpoint artifacts (if you use them for gesture ML model) ===
+*.tflite
+*.pb
+*.ckpt
+*.h5
+
+# === Ignore custom executables built in-place ===
+src/**/bin/

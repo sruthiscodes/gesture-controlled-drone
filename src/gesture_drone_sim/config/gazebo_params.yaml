@@ -1,0 +1,54 @@
+gazebo:
+  ros__parameters:
+    use_sim_time: true
+    debug: false
+    verbose: true
+    physics_engine: ode
+    max_step_size: 0.001
+    real_time_factor: 1.0
+    real_time_update_rate: 1000.0
+    max_contacts: 20
+    gravity: [0.0, 0.0, -9.81]
+    plugins:
+      gazebo_ros2_control:
+        plugin: gazebo_ros2_control/GazeboSystem
+        parameters:
+          robot_description: $(find gesture_drone_sim)/urdf/gesture_drone.urdf.xacro
+          robot_semantic_description: $(find gesture_drone_sim)/urdf/gesture_drone.urdf.xacro
+          robot_description_package: gesture_drone_sim
+          robot_description_file: urdf/gesture_drone.urdf.xacro
+          ros2_control_config: $(find gesture_drone_sim)/config/ros2_control.yaml
+    contact_max_correcting_vel: 100.0
+    contact_surface_layer: 0.001
+    magnetic_field:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    atmosphere:
+      type: adiabatic
+      temperature: 293.15
+      pressure: 101325.0
+      density: 1.2041
+      viscosity: 1.81e-05
+    wind:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    audio:
+      device: default
+      enabled: false
+    gui:
+      enabled: true
+      fullscreen: false
+      camera:
+        pose:
+          x: 0.0
+          y: 0.0
+          z: 0.0
+          roll: 0.0
+          pitch: 0.0
+          yaw: 0.0
+        track_visual:
+          name: base_link
+          min_dist: 0.1
+          max_dist: 10.0 

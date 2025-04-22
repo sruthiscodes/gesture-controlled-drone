@@ -1,0 +1,38 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 100  # Hz
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    left_front_motor_controller:
+      type: effort_controllers/JointEffortController
+      joint: rotor1_connector_joint
+      pid:
+        p: 0.1
+        i: 0.01
+        d: 0.0
+
+    right_front_motor_controller:
+      type: effort_controllers/JointEffortController
+      joint: rotor2_connector_joint
+      pid:
+        p: 0.1
+        i: 0.01
+        d: 0.0
+
+    left_back_motor_controller:
+      type: effort_controllers/JointEffortController
+      joint: rotor3_connector_joint
+      pid:
+        p: 0.1
+        i: 0.01
+        d: 0.0
+
+    right_back_motor_controller:
+      type: effort_controllers/JointEffortController
+      joint: rotor4_connector_joint
+      pid:
+        p: 0.1
+        i: 0.01
+        d: 0.0 
